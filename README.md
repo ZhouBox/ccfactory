@@ -1,0 +1,2 @@
+# ccfactory
+a factory
