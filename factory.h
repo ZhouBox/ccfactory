@@ -8,7 +8,7 @@
 
 using namespace std;
 
-template <typename T, typename T2 = std::string>
+template <typename T, typename K = std::string>
 class Factory
 {
 public:
@@ -19,7 +19,7 @@ public:
     template <typename N>
     struct register_h
     {
-        register_h(const T2& key)
+        register_h(const K& key)
         {
             Factory::instance()->m_creators[key] = []{ return new N; };
         }
@@ -32,7 +32,7 @@ public:
         return &f;
     }
 
-    auto creat(const T2& key) -> T*
+    auto creat(const K& key) -> T*
     {
         T* re = NULL;
         auto ite = m_creators.find(key);
@@ -42,7 +42,7 @@ public:
         return re;
     }
 
-    static auto produce(const T2& key) -> T*
+    static auto produce(const K& key) -> T*
     {
         return Factory::instance()->creat(key);
     }
@@ -52,7 +52,7 @@ private:
     Factory(const Factory&) = delete;
     Factory(Factory&&) = delete;
     Factory& operator =(const Factory&) = delete;
-    std::map<T2, std::function<T*()>> m_creators;
+    std::map<K, std::function<T*()>> m_creators;
 };
 
 
