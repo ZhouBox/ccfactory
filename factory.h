@@ -26,9 +26,9 @@ public:
     };
 
 
-    static auto instance() -> Factory<T>*
+    static auto instance() -> Factory<T, K>*
     {
-        static Factory<T> f;
+        static Factory<T, K> f;
         return &f;
     }
 
